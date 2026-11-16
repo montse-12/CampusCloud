@@ -1,0 +1,54 @@
+﻿services:
+  mongodb-cloud:
+    image: mongo:8.0.8-noble
+    container_name: campuscloud-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+    ports:
+      - "${MONGO_PORT}:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - campus-net
+
+  neo4j:
+    image: neo4j:5-community
+    container_name: campuscloud-neo4j
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: ${NEO4J_AUTH}
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - campus-net
+
+  scylladb:
+    image: scylladb/scylla:6.1
+    container_name: campuscloud-scylladb
+    restart: unless-stopped
+    command: --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
+    ports:
+      - "${SCYLLA_PORT}:9042"
+    volumes:
+      - scylla_data:/var/lib/scylla
+      - ../scylla:/scripts/scylla
+    networks:
+      - campus-net
+
+volumes:
+  mongo_data:
+    name: ${MONGO_VOLUME}
+  neo4j_data:
+    name: ${NEO4J_VOLUME}
+  scylla_data:
+    name: ${SCYLLA_VOLUME}
+
+networks:
+  campus-net:
+    driver: bridge

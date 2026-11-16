@@ -1,0 +1,10 @@
+﻿USE campuscloud_telemetria;
+INSERT INTO metricas_servicios (servicio_id, fecha_evento, cpu_porcentaje, ram_usada_gb, usuarios_activos, estado_nodo) VALUES ('SVC-201', '2026-11-16 09:00:00+0000', 71.2, 48.5, 18, 'OPTIMO');
+INSERT INTO metricas_servicios (servicio_id, fecha_evento, cpu_porcentaje, ram_usada_gb, usuarios_activos, estado_nodo) VALUES ('SVC-201', '2026-11-16 09:20:00+0000', 88.4, 59.1, 24, 'CARGA_ALTA');
+INSERT INTO metricas_servicios (servicio_id, fecha_evento, cpu_porcentaje, ram_usada_gb, usuarios_activos, estado_nodo) VALUES ('SVC-202', '2026-11-16 09:00:00+0000', 35.8, 9.2, 27, 'OPTIMO');
+INSERT INTO metricas_servicios (servicio_id, fecha_evento, cpu_porcentaje, ram_usada_gb, usuarios_activos, estado_nodo) VALUES ('SVC-205', '2026-11-16 09:30:00+0000', 52.0, 19.6, 11, 'OPTIMO');
+INSERT INTO bitacora_accesos (matricula, fecha_evento, servicio_id, accion, ip_origen) VALUES ('2025101', '2026-11-16 08:45:00+0000', 'SVC-202', 'INICIO_SESION_STUDIO', '10.20.30.14');
+INSERT INTO bitacora_accesos (matricula, fecha_evento, servicio_id, accion, ip_origen) VALUES ('2025101', '2026-11-16 09:15:00+0000', 'SVC-201', 'EJECUCION_MODELO_GPU', '10.20.30.14');
+INSERT INTO bitacora_accesos (matricula, fecha_evento, servicio_id, accion, ip_origen) VALUES ('2025102', '2026-11-16 09:05:00+0000', 'SVC-201', 'CARGA_DATASET', '10.20.30.29');
+SELECT * FROM metricas_servicios;
+SELECT * FROM bitacora_accesos;
